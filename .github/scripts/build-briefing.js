@@ -155,15 +155,21 @@ async function main() {
 
   regionSummaries.sort((a, b) => b.maxScore - a.maxScore);
 
+  const centralHour = parseInt(
+    new Intl.DateTimeFormat('en-US', { timeZone: 'America/Chicago', hour: 'numeric', hour12: false }).format(new Date()),
+    10
+  );
+  const greeting = centralHour < 12 ? 'Good morning.' : centralHour < 18 ? 'Good afternoon.' : 'Good evening.';
+
   const lines = [];
   const anyNews = topItem !== null;
 
   if (anyNews) {
     lines.push(
-      `Good morning. Here is your global conflict briefing. The most significant development in the last day comes from the ${topItem.region.toLowerCase()}: ${topItem.title}, reported by ${topItem.source} ${relativeTimeLabel(topItem.hrs)}. Full details follow.`
+      `${greeting} Here is your global conflict briefing. The most significant development in the last day comes from the ${topItem.region.toLowerCase()}: ${topItem.title}, reported by ${topItem.source} ${relativeTimeLabel(topItem.hrs)}. Full details follow.`
     );
   } else {
-    lines.push('Good morning. Here is your global conflict briefing. No significant conflict-related developments were detected across tracked regions in the last day.');
+    lines.push(`${greeting} Here is your global conflict briefing. No significant conflict-related developments were detected across tracked regions in the last day.`);
   }
 
   for (const rs of regionSummaries) {
@@ -179,7 +185,7 @@ async function main() {
   }
 
   lines.push('');
-  lines.push('This briefing is compiled automatically from regional news feeds and has not been cross-referenced by an editor. Treat single-source claims as unconfirmed. I will be back tomorrow morning.');
+  lines.push('This briefing is compiled automatically from regional news feeds and has not been cross-referenced by an editor. Treat single-source claims as unconfirmed. I will be back with the next update.');
 
   const script = lines.join('\n');
 

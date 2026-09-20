@@ -11,7 +11,7 @@ const briefing = JSON.parse(fs.readFileSync('briefing/latest.json', 'utf8'));
 const message = {
   topic: 'sitrep-daily',
   notification: {
-    title: 'Sitrep: ' + (briefing.headline || 'Daily briefing ready'),
+    title: 'SITREP: ' + (briefing.headline || 'Daily briefing ready'),
     body: "Tap to hear today's conflict briefing.",
   },
   data: {

@@ -1,0 +1,9 @@
+{
+  "North America": ["United States", "Central America", "The Caribbean", "Greenland"],
+  "South America": ["South America"],
+  "Europe": ["Southern Europe", "Northern Europe", "Central Europe", "Eastern Europe", "Western Europe", "Mediterranean Region", "Western Russia", "Central Russia", "Northern Russia"],
+  "Africa": ["Africa", "South Africa", "North Africa", "Central Africa", "West Africa", "Persian Gulf Region"],
+  "Asia": ["Asia", "South Asia", "India", "Southeast Asia", "Southern Russia", "Eastern Russia", "Korean Peninsula"],
+  "Australia": ["Australia", "New Zealand", "Oceania"],
+  "Antarctica": ["Antarctica"]
+}

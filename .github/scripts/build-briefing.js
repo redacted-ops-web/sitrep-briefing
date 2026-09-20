@@ -117,7 +117,7 @@ function updateCountryBlips(freshCountryNames, countryLookup) {
       continue;
     }
     entry.brightness = entry.brightness * DECAY_FACTOR;
-    if (entry.brightness < 0.03) {
+        if (entry.brightness < 0.03) {
       delete state[name];
     }
   }
@@ -171,6 +171,15 @@ async function fetchFeed(feed) {
 }
 
 async function main() {
+  const taxonomy = JSON.parse(fs.readFileSync(path.join(__dirname, 'region-taxonomy.json'), 'utf8'));
+  const continentOrder = Object.keys(taxonomy);
+  const regionToContinent = {};
+  for (const continent of continentOrder) {
+    for (const region of taxonomy[continent]) {
+      regionToContinent[region] = continent;
+    }
+  }
+
   const allResults = await Promise.all(feeds.map(fetchFeed));
   let items = allResults.flat();
 
@@ -179,22 +188,28 @@ async function main() {
     .map((it) => ({ ...it, hrs: hoursAgo(it.isoDate) }))
     .filter((it) => containsConflictKeyword(`${it.title} ${it.snippet}`));
 
+  const hasFeed = {};
+  for (const feed of feeds) hasFeed[feed.region] = true;
+
   const byRegion = {};
-  for (const feed of feeds) {
-    if (!byRegion[feed.region]) byRegion[feed.region] = [];
+  for (const continent of continentOrder) {
+    for (const region of taxonomy[continent]) {
+      byRegion[region] = [];
+    }
   }
   for (const it of items) {
     if (!byRegion[it.region]) byRegion[it.region] = [];
     byRegion[it.region].push(it);
   }
 
-  const regionSummaries = [];
+  const regionSummaries = {};
   const allSources = [];
   const freshCountryNames = new Set();
   const countryLookup = {};
   for (const c of countries) countryLookup[c.name] = c;
   let topItem = null;
   let topScore = -1;
+  const regionTopItems = [];
 
   for (const region of Object.keys(byRegion)) {
     let regionItems = byRegion[region];
@@ -227,24 +242,28 @@ async function main() {
       allSources.push({ region, title: it.title, url: it.link });
       const matchedCountries = detectCountries(`${it.title} ${it.snippet}`);
       for (const m of matchedCountries) freshCountryNames.add(m.name);
-      if (it.score > topScore) {
+            if (it.score > topScore) {
         topScore = it.score;
         topItem = { ...it, region };
       }
     }
 
-    regionSummaries.push({
+    if (topForRegion.length) {
+      regionTopItems.push({ region, continent: regionToContinent[region] || 'Unmapped', item: topForRegion[0] });
+    }
+
+    regionSummaries[region] = {
       region,
+      continent: regionToContinent[region] || 'Unmapped',
+      hasFeed: !!hasFeed[region],
       maxScore: regionMaxScore,
       windowHours,
       items: topForRegion,
-    });
+    };
   }
 
   const blips = updateCountryBlips(freshCountryNames, countryLookup);
 
-  regionSummaries.sort((a, b) => b.maxScore - a.maxScore);
-  
   const centralHour = parseInt(
     new Intl.DateTimeFormat('en-US', { timeZone: 'America/Chicago', hour: 'numeric', hour12: false }).format(new Date()),
     10
@@ -255,25 +274,51 @@ async function main() {
   const anyNews = topItem !== null;
 
   if (anyNews) {
-    lines.push(
-      `${greeting} Here is your global conflict briefing. The most significant development in the last day comes from the ${topItem.region.toLowerCase()}: ${topItem.title}, reported by ${topItem.source} ${relativeTimeLabel(topItem.hrs)}. Full details follow.`
-    );
+    lines.push(`${greeting} This is your global conflict briefing.`);
+    lines.push('');
+    lines.push('BOTTOM LINE UP FRONT:');
+    const bluf = regionTopItems
+      .slice()
+      .sort((a, b) => b.item.score - a.item.score)
+      .slice(0, 3);
+    for (const b of bluf) {
+      lines.push(`- ${b.region}: ${b.item.title}.`);
+    }
+    lines.push('');
+    lines.push('Full breakdown follows.');
   } else {
-    lines.push(`${greeting} Here is your global conflict briefing. No significant conflict-related developments were detected across tracked regions in the last day.`);
+    lines.push(`${greeting} This is your global conflict briefing. No significant conflict-related developments were detected across tracked regions in the last day.`);
   }
 
-  for (const rs of regionSummaries) {
+  for (const continent of continentOrder) {
+    const regionsInContinent = taxonomy[continent].map((r) => regionSummaries[r]);
+    const regionsWithFeed = regionsInContinent.filter((r) => r.hasFeed);
+    const regionsNoFeed = regionsInContinent.filter((r) => !r.hasFeed);
+
     lines.push('');
-    if (rs.items.length === 0) {
-      lines.push(`${rs.region}: no notable new developments in the last ${rs.windowHours} hours.`);
+
+    if (regionsWithFeed.length === 0) {
+      lines.push(`${continent.toUpperCase()}: no feed source currently tracked.`);
       continue;
     }
-    lines.push(`Turning to the ${rs.region}.`);
-    for (const it of rs.items) {
-      lines.push(`From ${it.source}, ${relativeTimeLabel(it.hrs)}: ${it.title}.`);
-      if (it.cleanedSnippet) {
-        lines.push(it.cleanedSnippet);
+
+    lines.push(continent.toUpperCase());
+    const sortedRegions = regionsWithFeed.slice().sort((a, b) => b.maxScore - a.maxScore);
+    for (const rs of sortedRegions) {
+      if (rs.items.length === 0) {
+        lines.push(`${rs.region}: no notable developments in the last ${rs.windowHours} hours.`);
+        continue;
       }
+      lines.push(`${rs.region} - bottom line: ${rs.items[0].title}.`);
+      for (const it of rs.items) {
+        lines.push(`- ${it.source}, ${relativeTimeLabel(it.hrs)}: ${it.title}.`);
+        if (it.cleanedSnippet) {
+          lines.push(it.cleanedSnippet);
+        }
+      }
+    }
+    if (regionsNoFeed.length > 0) {
+      lines.push(`Also tracked under ${continent}, no feed source yet: ${regionsNoFeed.map((r) => r.region).join(', ')}.`);
     }
   }
 

@@ -10,6 +10,7 @@ const parser = new Parser({
   },
 });
 const feeds = JSON.parse(fs.readFileSync(path.join(__dirname, 'feeds.json'), 'utf8'));
+const countries = JSON.parse(fs.readFileSync(path.join(__dirname, 'countries.json'), 'utf8'));
 
 const CONFLICT_KEYWORDS = [
   'war', 'invasion', 'invade', 'strike', 'strikes', 'attack', 'attacked',
@@ -80,6 +81,71 @@ function cleanSnippet(text, title) {
   return cleaned;
 }
 
+function detectCountries(text) {
+  const lower = text.toLowerCase();
+  const matches = [];
+  for (const c of countries) {
+    const terms = [c.name.toLowerCase(), ...c.aliases.map((a) => a.toLowerCase())];
+    if (terms.some((t) => lower.includes(t))) {
+      matches.push(c);
+    }
+  }
+  return matches;
+}
+
+function updateCountryBlips(freshCountryNames, countryLookup) {
+  const statePath = path.join(__dirname, '..', '..', 'briefing', 'country_blips.json');
+  let state = {};
+  if (fs.existsSync(statePath)) {
+    try {
+      state = JSON.parse(fs.readFileSync(statePath, 'utf8'));
+    } catch (e) {
+      state = {};
+    }
+  }
+
+  const now = Date.now();
+  const DECAY_FACTOR = 0.9;
+  const MAX_AGE_HOURS = 48;
+
+  for (const name of Object.keys(state)) {
+    if (freshCountryNames.has(name)) continue;
+    const entry = state[name];
+    const hoursSince = (now - entry.lastSeenAt) / (1000 * 60 * 60);
+    if (hoursSince > MAX_AGE_HOURS) {
+      delete state[name];
+      continue;
+    }
+    entry.brightness = entry.brightness * DECAY_FACTOR;
+    if (entry.brightness < 0.03) {
+      delete state[name];
+    }
+  }
+
+  for (const name of freshCountryNames) {
+    const info = countryLookup[name];
+    if (!info) continue;
+    state[name] = {
+      lat: info.lat,
+      lon: info.lon,
+      capital: info.capital,
+      brightness: 1.0,
+      lastSeenAt: now,
+    };
+  }
+
+  fs.mkdirSync(path.join(__dirname, '..', '..', 'briefing'), { recursive: true });
+  fs.writeFileSync(statePath, JSON.stringify(state, null, 2));
+
+  return Object.entries(state).map(([name, s]) => ({
+    country: name,
+    capital: s.capital,
+    lat: s.lat,
+    lon: s.lon,
+    brightness: Math.round(s.brightness * 100) / 100,
+  }));
+}
+
 function withTimeout(promise, ms) {
   return Promise.race([
     promise,
@@ -124,6 +190,9 @@ async function main() {
 
   const regionSummaries = [];
   const allSources = [];
+  const freshCountryNames = new Set();
+  const countryLookup = {};
+  for (const c of countries) countryLookup[c.name] = c;
   let topItem = null;
   let topScore = -1;
 
@@ -156,6 +225,8 @@ async function main() {
 
     for (const it of topForRegion) {
       allSources.push({ region, title: it.title, url: it.link });
+      const matchedCountries = detectCountries(`${it.title} ${it.snippet}`);
+      for (const m of matchedCountries) freshCountryNames.add(m.name);
       if (it.score > topScore) {
         topScore = it.score;
         topItem = { ...it, region };
@@ -169,9 +240,11 @@ async function main() {
       items: topForRegion,
     });
   }
-  
-  regionSummaries.sort((a, b) => b.maxScore - a.maxScore);
 
+  const blips = updateCountryBlips(freshCountryNames, countryLookup);
+
+  regionSummaries.sort((a, b) => b.maxScore - a.maxScore);
+  
   const centralHour = parseInt(
     new Intl.DateTimeFormat('en-US', { timeZone: 'America/Chicago', hour: 'numeric', hour12: false }).format(new Date()),
     10
@@ -226,6 +299,7 @@ async function main() {
     generatedAt: new Date().toISOString(),
     script,
     sources: allSources,
+    blips,
   };
 
   fs.mkdirSync(path.join(__dirname, '..', '..', 'briefing'), { recursive: true });
@@ -234,7 +308,7 @@ async function main() {
     JSON.stringify(output, null, 2)
   );
 
-  console.log('Briefing written. Headline:', headline);
+  console.log('Briefing written. Headline:', headline, '- Blips:', blips.length);
   process.exit(0);
 }
 

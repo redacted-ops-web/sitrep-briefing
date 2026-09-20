@@ -1,0 +1,9 @@
+{
+  "name": "sitrep-briefing-pipeline",
+  "private": true,
+  "version": "1.0.0",
+  "dependencies": {
+    "rss-parser": "^3.13.0",
+    "firebase-admin": "^12.1.0"
+  }
+}

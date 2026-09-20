@@ -105,7 +105,7 @@ function updateCountryBlips(freshCountryNames, countryLookup) {
   }
 
   const now = Date.now();
-  const DECAY_FACTOR = 0.9;
+    const DECAY_FACTOR = 0.9;
   const MAX_AGE_HOURS = 48;
 
   for (const name of Object.keys(state)) {
@@ -117,7 +117,7 @@ function updateCountryBlips(freshCountryNames, countryLookup) {
       continue;
     }
     entry.brightness = entry.brightness * DECAY_FACTOR;
-        if (entry.brightness < 0.03) {
+    if (entry.brightness < 0.03) {
       delete state[name];
     }
   }
@@ -170,6 +170,68 @@ async function fetchFeed(feed) {
   }
 }
 
+const STOPWORDS = new Set([
+  'the', 'a', 'an', 'and', 'or', 'of', 'in', 'on', 'to', 'for', 'with',
+  'after', 'amid', 'as', 'is', 'are', 'over', 'into', 'from', 'by', 'at',
+  'its', 'his', 'her', 'their', 'says', 'say', 'said', 'will', 'more',
+  'than', 'that', 'this', 'has', 'have', 'been', 'be', 'new', 'first',
+  'toward', 'towards', 'day', 'ld', 'last'
+]);
+
+function stemWord(w) {
+  return w.length > 5 ? w.slice(0, 5) : w;
+}
+
+function titleSignature(title) {
+  return new Set(
+    title
+      .toLowerCase()
+      .replace(/[^a-z0-9 ]/g, ' ')
+      .split(/\s+/)
+      .filter((w) => w.length >= 4 && !STOPWORDS.has(w))
+      .map(stemWord)
+  );
+}
+
+function signatureSimilarity(a, b) {
+  if (a.size === 0 || b.size === 0) return 0;
+  let inter = 0;
+  for (const w of a) {
+    if (b.has(w)) inter++;
+  }
+  return inter / Math.min(a.size, b.size);
+}
+
+function clusterStories(items, threshold = 0.55) {
+  const n = items.length;
+  const sigs = items.map((it) => titleSignature(it.title));
+  const parent = Array.from({ length: n }, (_, i) => i);
+  function find(x) {
+    while (parent[x] !== x) {
+      parent[x] = parent[parent[x]];
+      x = parent[x];
+    }
+    return x;
+  }
+  function union(a, b) {
+    const ra = find(a);
+    const rb = find(b);
+    if (ra !== rb) parent[ra] = rb;
+  }
+  for (let i = 0; i < n; i++) {
+    for (let j = i + 1; j < n; j++) {
+      if (signatureSimilarity(sigs[i], sigs[j]) >= threshold) union(i, j);
+    }
+  }
+  const groups = {};
+  for (let i = 0; i < n; i++) {
+    const root = find(i);
+    if (!groups[root]) groups[root] = [];
+    groups[root].push(items[i]);
+  }
+  return Object.values(groups);
+}
+
 async function main() {
   const taxonomy = JSON.parse(fs.readFileSync(path.join(__dirname, 'region-taxonomy.json'), 'utf8'));
   const continentOrder = Object.keys(taxonomy);
@@ -186,7 +248,7 @@ async function main() {
   items = items
     .filter((it) => it.title)
     .map((it) => ({ ...it, hrs: hoursAgo(it.isoDate) }))
-    .filter((it) => containsConflictKeyword(`${it.title} ${it.snippet}`));
+    .filter((it) => scoreItem(`${it.title} ${it.snippet}`) >= 3);
 
   const hasFeed = {};
   for (const feed of feeds) hasFeed[feed.region] = true;
@@ -202,17 +264,14 @@ async function main() {
     byRegion[it.region].push(it);
   }
 
-  const regionSummaries = {};
-  const allSources = [];
-  const freshCountryNames = new Set();
   const countryLookup = {};
   for (const c of countries) countryLookup[c.name] = c;
-  let topItem = null;
-  let topScore = -1;
-  const regionTopItems = [];
+
+  const windowHoursByRegion = {};
+  const freshScoredAll = [];
 
   for (const region of Object.keys(byRegion)) {
-    let regionItems = byRegion[region];
+    const regionItems = byRegion[region];
 
     let windowHours = FRESHNESS_HOURS_PRIMARY;
     let fresh = regionItems.filter((it) => it.hrs !== null && it.hrs <= windowHours);
@@ -220,49 +279,79 @@ async function main() {
       windowHours = FRESHNESS_HOURS_FALLBACK;
       fresh = regionItems.filter((it) => it.hrs !== null && it.hrs <= windowHours);
     }
+    windowHoursByRegion[region] = windowHours;
 
     const seen = new Set();
-    const scored = [];
     for (const it of fresh) {
       const key = normalizeTitle(it.title);
       if (seen.has(key)) continue;
       seen.add(key);
-      scored.push({
+      freshScoredAll.push({
         ...it,
         score: scoreItem(`${it.title} ${it.snippet}`),
         cleanedSnippet: cleanSnippet(it.snippet, it.title),
       });
     }
-    scored.sort((a, b) => (b.score - a.score) || (a.hrs - b.hrs));
+  }
 
-    const topForRegion = scored.slice(0, 4);
-    const regionMaxScore = topForRegion.length ? topForRegion[0].score : -1;
+  const clusters = clusterStories(freshScoredAll);
 
-    for (const it of topForRegion) {
-      allSources.push({ region, title: it.title, url: it.link });
-      const matchedCountries = detectCountries(`${it.title} ${it.snippet}`);
-      for (const m of matchedCountries) freshCountryNames.add(m.name);
-            if (it.score > topScore) {
-        topScore = it.score;
-        topItem = { ...it, region };
-      }
+  const freshCountryNames = new Set();
+  const stories = clusters.map((groupItems) => {
+    groupItems.sort((a, b) => (b.score - a.score) || (a.hrs - b.hrs));
+    const best = groupItems[0];
+    const sourceNames = [...new Set(groupItems.map((g) => g.source))];
+    const combinedText = groupItems.map((g) => `${g.title} ${g.snippet}`).join(' ');
+    const matchedCountries = detectCountries(combinedText);
+    for (const m of matchedCountries) freshCountryNames.add(m.name);
+    return {
+      title: best.title,
+      region: best.region,
+      hrs: Math.min(...groupItems.map((g) => g.hrs)),
+      score: best.score,
+      sources: sourceNames,
+      cleanedSnippet: best.cleanedSnippet,
+      items: groupItems,
+    };
+  });
+
+  const blips = updateCountryBlips(freshCountryNames, countryLookup);
+
+  const allSources = [];
+  for (const story of stories) {
+    for (const it of story.items) {
+      allSources.push({ region: story.region, title: it.title, url: it.link });
     }
+  }
 
-    if (topForRegion.length) {
-      regionTopItems.push({ region, continent: regionToContinent[region] || 'Unmapped', item: topForRegion[0] });
-    }
-
+  const regionSummaries = {};
+  for (const region of Object.keys(byRegion)) {
+    const regionStories = stories
+      .filter((s) => s.region === region)
+      .sort((a, b) => (b.score - a.score) || (a.hrs - b.hrs))
+      .slice(0, 4);
     regionSummaries[region] = {
       region,
       continent: regionToContinent[region] || 'Unmapped',
       hasFeed: !!hasFeed[region],
-      maxScore: regionMaxScore,
-      windowHours,
-      items: topForRegion,
+      maxScore: regionStories.length ? regionStories[0].score : -1,
+      windowHours: windowHoursByRegion[region] || FRESHNESS_HOURS_PRIMARY,
+            items: regionStories,
     };
   }
 
-  const blips = updateCountryBlips(freshCountryNames, countryLookup);
+  let topItem = null;
+  let topScore = -1;
+  const regionTopItems = [];
+  for (const region of Object.keys(regionSummaries)) {
+    const rs = regionSummaries[region];
+    if (rs.items.length === 0) continue;
+    regionTopItems.push({ region, item: rs.items[0] });
+    if (rs.items[0].score > topScore) {
+      topScore = rs.items[0].score;
+      topItem = { ...rs.items[0], region };
+    }
+  }
 
   const centralHour = parseInt(
     new Intl.DateTimeFormat('en-US', { timeZone: 'America/Chicago', hour: 'numeric', hour12: false }).format(new Date()),
@@ -293,15 +382,12 @@ async function main() {
   for (const continent of continentOrder) {
     const regionsInContinent = taxonomy[continent].map((r) => regionSummaries[r]);
     const regionsWithFeed = regionsInContinent.filter((r) => r.hasFeed);
-    const regionsNoFeed = regionsInContinent.filter((r) => !r.hasFeed);
-
-    lines.push('');
 
     if (regionsWithFeed.length === 0) {
-      lines.push(`${continent.toUpperCase()}: no feed source currently tracked.`);
       continue;
     }
 
+    lines.push('');
     lines.push(continent.toUpperCase());
     const sortedRegions = regionsWithFeed.slice().sort((a, b) => b.maxScore - a.maxScore);
     for (const rs of sortedRegions) {
@@ -310,15 +396,12 @@ async function main() {
         continue;
       }
       lines.push(`${rs.region} - bottom line: ${rs.items[0].title}.`);
-      for (const it of rs.items) {
-        lines.push(`- ${it.source}, ${relativeTimeLabel(it.hrs)}: ${it.title}.`);
-        if (it.cleanedSnippet) {
-          lines.push(it.cleanedSnippet);
+      for (const story of rs.items) {
+        lines.push(`- ${story.sources.join(', ')}, ${relativeTimeLabel(story.hrs)}: ${story.title}.`);
+        if (story.cleanedSnippet) {
+          lines.push(story.cleanedSnippet);
         }
       }
-    }
-    if (regionsNoFeed.length > 0) {
-      lines.push(`Also tracked under ${continent}, no feed source yet: ${regionsNoFeed.map((r) => r.region).join(', ')}.`);
     }
   }
 
@@ -353,10 +436,9 @@ async function main() {
     JSON.stringify(output, null, 2)
   );
 
-  console.log('Briefing written. Headline:', headline, '- Blips:', blips.length);
+  console.log('Briefing written. Headline:', headline, '- Blips:', blips.length, '- Stories:', stories.length);
   process.exit(0);
 }
-
 main().catch((err) => {
   console.error(err);
   process.exit(1);

@@ -67,6 +67,19 @@ function normalizeTitle(title) {
   return title.toLowerCase().replace(/[^a-z0-9 ]/g, '').slice(0, 60);
 }
 
+function cleanSnippet(text, title) {
+  if (!text) return '';
+  let cleaned = text.replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' ').trim();
+  if (!cleaned || cleaned.toLowerCase() === (title || '').toLowerCase()) return '';
+  const maxLen = 600;
+  if (cleaned.length > maxLen) {
+    let cut = cleaned.lastIndexOf('. ', maxLen);
+    if (cut < 150) cut = maxLen;
+    cleaned = cleaned.slice(0, cut + 1);
+  }
+  return cleaned;
+}
+
 function withTimeout(promise, ms) {
   return Promise.race([
     promise,
@@ -83,7 +96,7 @@ async function fetchFeed(feed) {
       title: (item.title || '').trim(),
       link: item.link || '',
       isoDate: item.isoDate || item.pubDate || null,
-      snippet: (item.contentSnippet || item.content || '').trim(),
+      snippet: (item.contentSnippet || item.content || item.summary || '').trim(),
     }));
   } catch (err) {
     console.warn(`Feed failed, skipping: ${feed.name} (${feed.url}) - ${err.message}`);
@@ -114,111 +127,4 @@ async function main() {
   let topItem = null;
   let topScore = -1;
 
-  for (const region of Object.keys(byRegion)) {
-    let regionItems = byRegion[region];
-
-    let windowHours = FRESHNESS_HOURS_PRIMARY;
-    let fresh = regionItems.filter((it) => it.hrs !== null && it.hrs <= windowHours);
-    if (fresh.length === 0) {
-      windowHours = FRESHNESS_HOURS_FALLBACK;
-      fresh = regionItems.filter((it) => it.hrs !== null && it.hrs <= windowHours);
-    }
-
-    const seen = new Set();
-    const scored = [];
-    for (const it of fresh) {
-      const key = normalizeTitle(it.title);
-      if (seen.has(key)) continue;
-      seen.add(key);
-      scored.push({ ...it, score: scoreItem(`${it.title} ${it.snippet}`) });
-    }
-    scored.sort((a, b) => (b.score - a.score) || (a.hrs - b.hrs));
-
-    const topForRegion = scored.slice(0, 4);
-    const regionMaxScore = topForRegion.length ? topForRegion[0].score : -1;
-
-    for (const it of topForRegion) {
-      allSources.push({ region, title: it.title, url: it.link });
-      if (it.score > topScore) {
-        topScore = it.score;
-        topItem = { ...it, region };
-      }
-    }
-
-    regionSummaries.push({
-      region,
-      maxScore: regionMaxScore,
-      windowHours,
-      items: topForRegion,
-    });
-  }
-
-  regionSummaries.sort((a, b) => b.maxScore - a.maxScore);
-
-  const centralHour = parseInt(
-    new Intl.DateTimeFormat('en-US', { timeZone: 'America/Chicago', hour: 'numeric', hour12: false }).format(new Date()),
-    10
-  );
-  const greeting = centralHour < 12 ? 'Good morning.' : centralHour < 18 ? 'Good afternoon.' : 'Good evening.';
-
-  const lines = [];
-  const anyNews = topItem !== null;
-
-  if (anyNews) {
-    lines.push(
-      `${greeting} Here is your global conflict briefing. The most significant development in the last day comes from the ${topItem.region.toLowerCase()}: ${topItem.title}, reported by ${topItem.source} ${relativeTimeLabel(topItem.hrs)}. Full details follow.`
-    );
-  } else {
-    lines.push(`${greeting} Here is your global conflict briefing. No significant conflict-related developments were detected across tracked regions in the last day.`);
-  }
-
-  for (const rs of regionSummaries) {
-    lines.push('');
-    if (rs.items.length === 0) {
-      lines.push(`${rs.region}: no notable new developments in the last ${rs.windowHours} hours.`);
-      continue;
-    }
-    lines.push(`Turning to the ${rs.region}.`);
-    for (const it of rs.items) {
-      lines.push(`From ${it.source}, ${relativeTimeLabel(it.hrs)}: ${it.title}.`);
-    }
-  }
-
-  lines.push('');
-  lines.push('This briefing is compiled automatically from regional news feeds and has not been cross-referenced by an editor. Treat single-source claims as unconfirmed. I will be back with the next update.');
-
-  const script = lines.join('\n');
-
-  const dateStr = new Intl.DateTimeFormat('en-CA', {
-    timeZone: 'America/Chicago',
-    year: 'numeric',
-    month: '2-digit',
-    day: '2-digit',
-  }).format(new Date());
-
-  const headline = anyNews
-    ? `${topItem.region}: ${topItem.title}`
-    : 'Quiet day across all tracked regions';
-
-  const output = {
-    date: dateStr,
-    headline,
-    generatedAt: new Date().toISOString(),
-    script,
-    sources: allSources,
-  };
-
-  fs.mkdirSync(path.join(__dirname, '..', '..', 'briefing'), { recursive: true });
-  fs.writeFileSync(
-    path.join(__dirname, '..', '..', 'briefing', 'latest.json'),
-    JSON.stringify(output, null, 2)
-  );
-
-  console.log('Briefing written. Headline:', headline);
-  process.exit(0);
-}
-
-main().catch((err) => {
-  console.error(err);
-  process.exit(1);
-});
+  for (const region of

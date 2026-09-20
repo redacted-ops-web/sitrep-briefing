@@ -1,0 +1,156 @@
+{
+  "North Korea": {
+    "lat": 39.0392,
+    "lon": 125.7625,
+    "capital": "Pyongyang",
+    "brightness": 1,
+    "lastSeenAt": 1789935000336
+  },
+  "South Korea": {
+    "lat": 37.5665,
+    "lon": 126.978,
+    "capital": "Seoul",
+    "brightness": 1,
+    "lastSeenAt": 1789935000336
+  },
+  "Japan": {
+    "lat": 35.6762,
+    "lon": 139.6503,
+    "capital": "Tokyo",
+    "brightness": 1,
+    "lastSeenAt": 1789935000336
+  },
+  "Russia": {
+    "lat": 55.7558,
+    "lon": 37.6173,
+    "capital": "Moscow",
+    "brightness": 1,
+    "lastSeenAt": 1789935000336
+  },
+  "Ukraine": {
+    "lat": 50.4501,
+    "lon": 30.5234,
+    "capital": "Kyiv",
+    "brightness": 1,
+    "lastSeenAt": 1789935000336
+  },
+  "United Kingdom": {
+    "lat": 51.5072,
+    "lon": -0.1276,
+    "capital": "London",
+    "brightness": 1,
+    "lastSeenAt": 1789935000336
+  },
+  "Iran": {
+    "lat": 35.6892,
+    "lon": 51.389,
+    "capital": "Tehran",
+    "brightness": 1,
+    "lastSeenAt": 1789935000336
+  },
+  "Central African Republic": {
+    "lat": 4.3947,
+    "lon": 18.5582,
+    "capital": "Bangui",
+    "brightness": 1,
+    "lastSeenAt": 1789935000336
+  },
+  "Yemen": {
+    "lat": 15.3694,
+    "lon": 44.191,
+    "capital": "Sanaa",
+    "brightness": 1,
+    "lastSeenAt": 1789935000336
+  },
+  "Saudi Arabia": {
+    "lat": 24.7136,
+    "lon": 46.6753,
+    "capital": "Riyadh",
+    "brightness": 1,
+    "lastSeenAt": 1789935000336
+  },
+  "Palestine": {
+    "lat": 31.9038,
+    "lon": 35.2034,
+    "capital": "Ramallah",
+    "brightness": 1,
+    "lastSeenAt": 1789935000336
+  },
+  "Turkey": {
+    "lat": 39.9334,
+    "lon": 32.8597,
+    "capital": "Ankara",
+    "brightness": 1,
+    "lastSeenAt": 1789935000336
+  },
+  "Nigeria": {
+    "lat": 9.0765,
+    "lon": 7.3986,
+    "capital": "Abuja",
+    "brightness": 1,
+    "lastSeenAt": 1789935000336
+  },
+  "Niger": {
+    "lat": 13.5127,
+    "lon": 2.1126,
+    "capital": "Niamey",
+    "brightness": 1,
+    "lastSeenAt": 1789935000336
+  },
+  "United States": {
+    "lat": 38.9072,
+    "lon": -77.0369,
+    "capital": "Washington, D.C.",
+    "brightness": 1,
+    "lastSeenAt": 1789935000336
+  },
+  "Israel": {
+    "lat": 31.7683,
+    "lon": 35.2137,
+    "capital": "Jerusalem",
+    "brightness": 1,
+    "lastSeenAt": 1789935000336
+  },
+  "Lebanon": {
+    "lat": 33.8938,
+    "lon": 35.5018,
+    "capital": "Beirut",
+    "brightness": 1,
+    "lastSeenAt": 1789935000336
+  },
+  "Egypt": {
+    "lat": 30.0444,
+    "lon": 31.2357,
+    "capital": "Cairo",
+    "brightness": 1,
+    "lastSeenAt": 1789935000336
+  },
+  "Pakistan": {
+    "lat": 33.6844,
+    "lon": 73.0479,
+    "capital": "Islamabad",
+    "brightness": 1,
+    "lastSeenAt": 1789935000336
+  },
+  "Afghanistan": {
+    "lat": 34.5553,
+    "lon": 69.2075,
+    "capital": "Kabul",
+    "brightness": 1,
+    "lastSeenAt": 1789935000336
+  },
+  "India": {
+    "lat": 28.6139,
+    "lon": 77.209,
+    "capital": "New Delhi",
+    "brightness": 1,
+    "lastSeenAt": 1789935000336
+  },
+  "Argentina": {
+    "lat": -34.6037,
+    "lon": -58.3816,
+    "capital": "Buenos Aires",
+    "brightness": 1,
+    "lastSeenAt": 1789935000336
+  }
+}

@@ -2,7 +2,13 @@ const fs = require('fs');
 const path = require('path');
 const Parser = require('rss-parser');
 
-const parser = new Parser({ timeout: 15000 });
+const parser = new Parser({
+  timeout: 15000,
+  headers: {
+    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+    'Accept': 'application/rss+xml, application/xml, text/xml, */*',
+  },
+});
 const feeds = JSON.parse(fs.readFileSync(path.join(__dirname, 'feeds.json'), 'utf8'));
 
 const CONFLICT_KEYWORDS = [
@@ -61,9 +67,16 @@ function normalizeTitle(title) {
   return title.toLowerCase().replace(/[^a-z0-9 ]/g, '').slice(0, 60);
 }
 
+function withTimeout(promise, ms) {
+  return Promise.race([
+    promise,
+    new Promise((_, reject) => setTimeout(() => reject(new Error('hard timeout')), ms)),
+  ]);
+}
+
 async function fetchFeed(feed) {
   try {
-    const parsed = await parser.parseURL(feed.url);
+    const parsed = await withTimeout(parser.parseURL(feed.url), 20000);
     return (parsed.items || []).map((item) => ({
       region: feed.region,
       source: feed.name,
@@ -196,6 +209,7 @@ async function main() {
   );
 
   console.log('Briefing written. Headline:', headline);
+  process.exit(0);
 }
 
 main().catch((err) => {

@@ -21,7 +21,6 @@
   { "region": "Australia", "name": "The Guardian - Australia", "url": "https://www.theguardian.com/australia-news/rss" },
   { "region": "South America", "name": "Buenos Aires Herald", "url": "https://buenosairesherald.com/feed/" },
   { "region": "South America", "name": "Caracas Chronicles", "url": "https://www.caracaschronicles.com/feed/" },
-  { "region": "Central America", "name": "InSight Crime", "url": "https://insightcrime.org/feed/" },
   { "region": "Central America", "name": "Confidencial (Nicaragua)", "url": "https://confidencial.digital/english/feed/" },
   { "region": "The Caribbean", "name": "Jamaica Gleaner", "url": "http://jamaica-gleaner.com/feed/rss.xml" },
   { "region": "The Caribbean", "name": "Jamaica Observer", "url": "https://www.jamaicaobserver.com/app/latest/" },

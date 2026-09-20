@@ -7,7 +7,6 @@
   { "region": "Persian Gulf Region", "name": "Jerusalem Post", "url": "https://www.jpost.com/rss/rssfeedsfrontpage.aspx" },
   { "region": "Africa", "name": "AllAfrica - Conflict", "url": "https://allafrica.com/tools/headlines/rdf/conflict/headlines.rdf" },
   { "region": "Africa", "name": "Africanews", "url": "https://www.africanews.com/feed/rss" },
-  { "region": "South Africa", "name": "The South African", "url": "https://www.thesouthafrican.com/feed/" },
   { "region": "South Africa", "name": "AllAfrica - Southern Africa", "url": "https://allafrica.com/tools/headlines/rdf/southernafrica/headlines.rdf" },
   { "region": "Southern Europe", "name": "Balkan Insight", "url": "https://balkaninsight.com/feed/" },
   { "region": "Southern Europe", "name": "Politico Europe", "url": "https://www.politico.eu/feed/" },
@@ -23,6 +22,5 @@
   { "region": "South America", "name": "Caracas Chronicles", "url": "https://www.caracaschronicles.com/feed/" },
   { "region": "Central America", "name": "Confidencial (Nicaragua)", "url": "https://confidencial.digital/english/feed/" },
   { "region": "The Caribbean", "name": "Jamaica Gleaner", "url": "http://jamaica-gleaner.com/feed/rss.xml" },
-  { "region": "The Caribbean", "name": "Jamaica Observer", "url": "https://www.jamaicaobserver.com/app/latest/" },
   { "region": "United States", "name": "Military Times", "url": "https://www.militarytimes.com/arc/outboundfeeds/rss/category/news/your-military/?outputType=xml" }
 ]

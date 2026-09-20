@@ -1,7 +1,118 @@
 {
   "date": "2026-09-20",
-  "headline": "Sitrep briefing app initialized, waiting for first automated run.",
-  "generatedAt": "2026-09-20T15:00:00Z",
-  "script": "This is a placeholder. The first real briefing will publish automatically on the next scheduled run.",
-  "sources": []
+  "headline": "South & Southeast Asia: US warns Middle East conflict could 'escalate rapidly', urges citizens to reconsider travel",
+  "generatedAt": "2026-09-20T16:00:39.965Z",
+  "script": "Good morning. Here is your global conflict briefing. The most significant development in the last day comes from the south & southeast asia: US warns Middle East conflict could 'escalate rapidly', urges citizens to reconsider travel, reported by Dawn (Pakistan) 2 hours ago. Full details follow.\n\nTurning to the South & Southeast Asia.\nFrom Dawn (Pakistan), 2 hours ago: US warns Middle East conflict could 'escalate rapidly', urges citizens to reconsider travel.\nFrom Dawn (Pakistan), 21 hours ago: Houthis say targeted 'sensitive sites' in Riyadh, Aramco facilities in Yanbu.\nFrom Dawn (Pakistan), 11 hours ago: Turkiye says it could help meet Saudi Arabia’s military needs.\nFrom Dawn (Pakistan), one day ago: Kohat Police Lines attack: 8 terrorists killed as overnight clearance operation concludes.\n\nTurning to the Asia-Pacific / East Asia.\nFrom South China Morning Post - China, 9 hours ago: Ukraine pummels Moscow with drones on last day of Russian election.\nFrom South China Morning Post - China, 21 hours ago: Houthis claim attacks on Saudi capital, after flames seen near Riyadh airport.\nFrom South China Morning Post - China, 5 hours ago: North Korea fires 2 missiles in 3 hours amid tensions over US drills.\nFrom South China Morning Post - China, 13 hours ago: Some Western politicians stoking Nato-Russia clash as Ukraine war strategy falters: Fico.\n\nTurning to the Korean Peninsula.\nFrom Yonhap News Agency, 8 hours ago: (2nd LD) N. Korea fires 1 short-range ballistic missile toward East Sea: S. Korean military.\nFrom Yonhap News Agency, 8 hours ago: (LEAD) N. Korea fires 1 short-range ballistic missile toward East Sea: S. Korean military.\nFrom NK News, 10 hours ago: North Korea launches suspected ballistic missiles toward East Sea: JCS.\nFrom Yonhap News Agency, 5 hours ago: (4th LD) N. Korea fires 2 short-range ballistic missiles hours apart ahead of Trump-Xi summit.\n\nTurning to the Middle East.\nFrom Al Jazeera - Middle East, 3 hours ago: Moscow attacked by more than 1,000 Ukrainian drones.\nFrom Al Jazeera - Middle East, 5 hours ago: What are Iran’s latest conditions to end its war with the US?.\nFrom Al Jazeera - Middle East, 6 hours ago: Turkish FM says ready to meet Saudi defence needs – what does that mean?.\nFrom Al Jazeera - Middle East, 3 hours ago: Postponing the future: War and inflation redraw marriage terms in Iran.\n\nTurning to the Russia's Conflicts.\nFrom The Moscow Times, 8 hours ago: 3 Dead in Moscow Region, Drones Hit Oil Refinery in Russian Capital.\nFrom The Moscow Times, 9 hours ago: Russian Election, Cast as Test of Support for Ukraine War, Enters Final Day.\n\nTurning to the United States.\nFrom Military Times, 2 days ago: Soldier identified following rollover crash at Fort Hood.\nFrom Military Times, 2 days ago: Army’s H2F program linked to faster injury recovery among soldiers, study finds.\nFrom Military Times, 2 days ago: Army to promote NCOs who complete drill sergeant, recruiting schools.\n\nTurning to the The Americas.\nFrom Buenos Aires Herald, 3 hours ago: Twenty years without Jorge Julio López, the man who disappeared twice.\n\nAfrica: no notable new developments in the last 48 hours.\n\nEurope (non-Russia): no notable new developments in the last 48 hours.\n\nThis briefing is compiled automatically from regional news feeds and has not been cross-referenced by an editor. Treat single-source claims as unconfirmed. I will be back tomorrow morning.",
+  "sources": [
+    {
+      "region": "Korean Peninsula",
+      "title": "(2nd LD) N. Korea fires 1 short-range ballistic missile toward East Sea: S. Korean military",
+      "url": "https://en.yna.co.kr/view/AEN20260920002952315"
+    },
+    {
+      "region": "Korean Peninsula",
+      "title": "(LEAD) N. Korea fires 1 short-range ballistic missile toward East Sea: S. Korean military",
+      "url": "https://en.yna.co.kr/view/AEN20260920002951315"
+    },
+    {
+      "region": "Korean Peninsula",
+      "title": "North Korea launches suspected ballistic missiles toward East Sea: JCS",
+      "url": "https://www.nknews.org/2026/09/north-korea-launches-unidentified-projectile-toward-east-sea-jcs-2/"
+    },
+    {
+      "region": "Korean Peninsula",
+      "title": "(4th LD) N. Korea fires 2 short-range ballistic missiles hours apart ahead of Trump-Xi summit",
+      "url": "https://en.yna.co.kr/view/AEN20260920002954315"
+    },
+    {
+      "region": "Russia's Conflicts",
+      "title": "3 Dead in Moscow Region, Drones Hit Oil Refinery in Russian Capital",
+      "url": "https://www.themoscowtimes.com/2026/09/20/2-dead-in-moscow-region-drones-hit-oil-refinery-in-russian-capital-a93753"
+    },
+    {
+      "region": "Russia's Conflicts",
+      "title": "Russian Election, Cast as Test of Support for Ukraine War, Enters Final Day",
+      "url": "https://www.themoscowtimes.com/2026/09/20/russian-election-cast-as-test-of-support-for-ukraine-war-enters-final-day-a93752"
+    },
+    {
+      "region": "Middle East",
+      "title": "Moscow attacked by more than 1,000 Ukrainian drones",
+      "url": "https://www.aljazeera.com/video/newsfeed/2026/9/20/moscow-attacked-by-more-than-1000-ukrainian-drones?traffic_source=rss"
+    },
+    {
+      "region": "Middle East",
+      "title": "What are Iran’s latest conditions to end its war with the US?",
+      "url": "https://www.aljazeera.com/news/2026/9/20/what-are-irans-new-conditions-to-end-its-war-with-the-us?traffic_source=rss"
+    },
+    {
+      "region": "Middle East",
+      "title": "Turkish FM says ready to meet Saudi defence needs – what does that mean?",
+      "url": "https://www.aljazeera.com/news/2026/9/20/turkish-fm-says-ready-to-meet-saudi-defence-needs-what-does-that-mean?traffic_source=rss"
+    },
+    {
+      "region": "Middle East",
+      "title": "Postponing the future: War and inflation redraw marriage terms in Iran",
+      "url": "https://www.aljazeera.com/economy/2026/9/20/postponing-the-future-war-and-inflation-redraw-marriage-terms-in-iran?traffic_source=rss"
+    },
+    {
+      "region": "South & Southeast Asia",
+      "title": "US warns Middle East conflict could 'escalate rapidly', urges citizens to reconsider travel",
+      "url": "https://www.dawn.com/news/2031365/us-warns-middle-east-conflict-could-escalate-rapidly-urges-citizens-to-reconsider-travel"
+    },
+    {
+      "region": "South & Southeast Asia",
+      "title": "Houthis say targeted 'sensitive sites' in Riyadh, Aramco facilities in Yanbu",
+      "url": "https://www.dawn.com/news/2031137/houthis-say-targeted-sensitive-sites-in-riyadh-aramco-facilities-in-yanbu"
+    },
+    {
+      "region": "South & Southeast Asia",
+      "title": "Turkiye says it could help meet Saudi Arabia’s military needs",
+      "url": "https://www.dawn.com/news/2031285/turkiye-says-it-could-help-meet-saudi-arabias-military-needs"
+    },
+    {
+      "region": "South & Southeast Asia",
+      "title": "Kohat Police Lines attack: 8 terrorists killed as overnight clearance operation concludes",
+      "url": "https://www.dawn.com/news/2031100/kohat-police-lines-attack-8-terrorists-killed-as-overnight-clearance-operation-concludes"
+    },
+    {
+      "region": "Asia-Pacific / East Asia",
+      "title": "Ukraine pummels Moscow with drones on last day of Russian election",
+      "url": "https://www.scmp.com/news/world/russia-central-asia/article/3368144/ukraine-pummels-moscow-drones-last-day-russian-election?utm_source=rss_feed"
+    },
+    {
+      "region": "Asia-Pacific / East Asia",
+      "title": "Houthis claim attacks on Saudi capital, after flames seen near Riyadh airport",
+      "url": "https://www.scmp.com/news/world/middle-east/article/3368131/houthis-claim-attacks-saudi-capital-after-flames-seen-near-riyadh-airport?utm_source=rss_feed"
+    },
+    {
+      "region": "Asia-Pacific / East Asia",
+      "title": "North Korea fires 2 missiles in 3 hours amid tensions over US drills",
+      "url": "https://www.scmp.com/news/asia/east-asia/article/3368160/north-korea-fires-two-missiles-three-hours-amid-tensions-over-us-drills?utm_source=rss_feed"
+    },
+    {
+      "region": "Asia-Pacific / East Asia",
+      "title": "Some Western politicians stoking Nato-Russia clash as Ukraine war strategy falters: Fico",
+      "url": "https://www.scmp.com/news/world/europe/article/3368137/some-western-politicians-stoking-nato-russia-clash-ukraine-war-strategy-falters-fico?utm_source=rss_feed"
+    },
+    {
+      "region": "The Americas",
+      "title": "Twenty years without Jorge Julio López, the man who disappeared twice",
+      "url": "https://buenosairesherald.com/human-rights/twenty-years-without-jorge-julio-lopez-the-man-who-disappeared-twice"
+    },
+    {
+      "region": "United States",
+      "title": "Soldier identified following rollover crash at Fort Hood",
+      "url": "https://www.militarytimes.com/news/your-military/2026/09/18/soldier-identified-following-rollover-crash-at-fort-hood/"
+    },
+    {
+      "region": "United States",
+      "title": "Army’s H2F program linked to faster injury recovery among soldiers, study finds",
+      "url": "https://www.militarytimes.com/news/your-military/2026/09/18/armys-h2f-program-linked-to-faster-injury-recovery-among-soldiers-study-finds/"
+    },
+    {
+      "region": "United States",
+      "title": "Army to promote NCOs who complete drill sergeant, recruiting schools",
+      "url": "https://www.militarytimes.com/news/your-military/2026/09/18/army-to-promote-ncos-who-complete-drill-sergeant-recruiting-schools/"
+    }
+  ]
 }

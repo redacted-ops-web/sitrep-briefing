@@ -4,111 +4,111 @@
     "lon": 125.7625,
     "capital": "Pyongyang",
     "brightness": 1,
-    "lastSeenAt": 1791998405064
+    "lastSeenAt": 1792009376602
   },
   "South Korea": {
     "lat": 37.5665,
     "lon": 126.978,
     "capital": "Seoul",
     "brightness": 1,
-    "lastSeenAt": 1791998405064
+    "lastSeenAt": 1792009376602
   },
   "Japan": {
     "lat": 35.6762,
     "lon": 139.6503,
     "capital": "Tokyo",
     "brightness": 1,
-    "lastSeenAt": 1791998405064
+    "lastSeenAt": 1792009376602
   },
   "Russia": {
     "lat": 55.7558,
     "lon": 37.6173,
     "capital": "Moscow",
     "brightness": 1,
-    "lastSeenAt": 1791998405064
+    "lastSeenAt": 1792009376602
   },
   "Ukraine": {
     "lat": 50.4501,
     "lon": 30.5234,
     "capital": "Kyiv",
     "brightness": 1,
-    "lastSeenAt": 1791998405064
+    "lastSeenAt": 1792009376602
   },
   "United Kingdom": {
     "lat": 51.5072,
     "lon": -0.1276,
     "capital": "London",
     "brightness": 1,
-    "lastSeenAt": 1791998405064
+    "lastSeenAt": 1792009376602
   },
   "Iran": {
     "lat": 35.6892,
     "lon": 51.389,
     "capital": "Tehran",
     "brightness": 1,
-    "lastSeenAt": 1791998405064
+    "lastSeenAt": 1792009376602
   },
   "Central African Republic": {
     "lat": 4.3947,
     "lon": 18.5582,
     "capital": "Bangui",
     "brightness": 1,
-    "lastSeenAt": 1791998405064
+    "lastSeenAt": 1792009376602
   },
   "Yemen": {
     "lat": 15.3694,
     "lon": 44.191,
     "capital": "Sanaa",
     "brightness": 1,
-    "lastSeenAt": 1791998405064
+    "lastSeenAt": 1792009376602
   },
   "Saudi Arabia": {
     "lat": 24.7136,
     "lon": 46.6753,
     "capital": "Riyadh",
     "brightness": 1,
-    "lastSeenAt": 1791998405064
+    "lastSeenAt": 1792009376602
   },
   "Palestine": {
     "lat": 31.9038,
     "lon": 35.2034,
     "capital": "Ramallah",
     "brightness": 1,
-    "lastSeenAt": 1791998405064
+    "lastSeenAt": 1792009376602
   },
   "Nigeria": {
     "lat": 9.0765,
     "lon": 7.3986,
     "capital": "Abuja",
     "brightness": 1,
-    "lastSeenAt": 1791998405064
+    "lastSeenAt": 1792009376602
   },
   "Niger": {
     "lat": 13.5127,
     "lon": 2.1126,
     "capital": "Niamey",
     "brightness": 1,
-    "lastSeenAt": 1791998405064
+    "lastSeenAt": 1792009376602
   },
   "United States": {
     "lat": 38.9072,
     "lon": -77.0369,
     "capital": "Washington, D.C.",
     "brightness": 1,
-    "lastSeenAt": 1791998405064
+    "lastSeenAt": 1792009376602
   },
   "Israel": {
     "lat": 31.7683,
     "lon": 35.2137,
     "capital": "Jerusalem",
     "brightness": 1,
-    "lastSeenAt": 1791998405064
+    "lastSeenAt": 1792009376602
   },
   "Egypt": {
     "lat": 30.0444,
     "lon": 31.2357,
     "capital": "Cairo",
-    "brightness": 1,
+    "brightness": 0.9,
     "lastSeenAt": 1791998405064
   },
   "Pakistan": {
@@ -116,83 +116,83 @@
     "lon": 73.0479,
     "capital": "Islamabad",
     "brightness": 1,
-    "lastSeenAt": 1791998405064
+    "lastSeenAt": 1792009376602
   },
   "Afghanistan": {
     "lat": 34.5553,
     "lon": 69.2075,
     "capital": "Kabul",
     "brightness": 1,
-    "lastSeenAt": 1791998405064
+    "lastSeenAt": 1792009376602
   },
   "India": {
     "lat": 28.6139,
     "lon": 77.209,
     "capital": "New Delhi",
     "brightness": 1,
-    "lastSeenAt": 1791998405064
+    "lastSeenAt": 1792009376602
   },
   "Germany": {
     "lat": 52.52,
     "lon": 13.405,
     "capital": "Berlin",
     "brightness": 1,
-    "lastSeenAt": 1791998405064
+    "lastSeenAt": 1792009376602
   },
   "Australia": {
     "lat": -35.2809,
     "lon": 149.13,
     "capital": "Canberra",
     "brightness": 1,
-    "lastSeenAt": 1791998405064
+    "lastSeenAt": 1792009376602
   },
   "Peru": {
     "lat": -12.0464,
     "lon": -77.0428,
     "capital": "Lima",
     "brightness": 1,
-    "lastSeenAt": 1791998405064
+    "lastSeenAt": 1792009376602
   },
   "China": {
     "lat": 39.9042,
     "lon": 116.4074,
     "capital": "Beijing",
     "brightness": 1,
-    "lastSeenAt": 1791998405064
+    "lastSeenAt": 1792009376602
   },
   "South Africa": {
     "lat": -25.7479,
     "lon": 28.2293,
     "capital": "Pretoria",
     "brightness": 1,
-    "lastSeenAt": 1791998405064
+    "lastSeenAt": 1792009376602
   },
   "Thailand": {
     "lat": 13.7563,
     "lon": 100.5018,
     "capital": "Bangkok",
     "brightness": 1,
-    "lastSeenAt": 1791998405064
+    "lastSeenAt": 1792009376602
   },
   "France": {
     "lat": 48.8566,
     "lon": 2.3522,
     "capital": "Paris",
     "brightness": 1,
-    "lastSeenAt": 1791998405064
+    "lastSeenAt": 1792009376602
   },
   "Taiwan": {
     "lat": 25.033,
     "lon": 121.5654,
     "capital": "Taipei",
     "brightness": 1,
-    "lastSeenAt": 1791998405064
+    "lastSeenAt": 1792009376602
   },
   "Poland": {
     "lat": 52.2297,
     "lon": 21.0122,
     "capital": "Warsaw",
-    "brightness": 1,
+    "brightness": 0.9,
     "lastSeenAt": 1791998405064
   },
   "Mali": {
@@ -200,48 +200,48 @@
     "lon": -8.0029,
     "capital": "Bamako",
     "brightness": 1,
-    "lastSeenAt": 1791998405064
+    "lastSeenAt": 1792009376602
   },
   "Bangladesh": {
     "lat": 23.8103,
     "lon": 90.4125,
     "capital": "Dhaka",
     "brightness": 1,
-    "lastSeenAt": 1791998405064
+    "lastSeenAt": 1792009376602
   },
   "Sudan": {
     "lat": 15.5007,
     "lon": 32.5599,
     "capital": "Khartoum",
     "brightness": 1,
-    "lastSeenAt": 1791998405064
+    "lastSeenAt": 1792009376602
   },
   "Ethiopia": {
     "lat": 9.03,
     "lon": 38.74,
     "capital": "Addis Ababa",
-    "brightness": 0.7290000000000001,
+    "brightness": 0.6561000000000001,
     "lastSeenAt": 1791933103366
   },
   "Indonesia": {
     "lat": -6.2088,
     "lon": 106.8456,
     "capital": "Jakarta",
-    "brightness": 0.7290000000000001,
+    "brightness": 0.6561000000000001,
     "lastSeenAt": 1791933103366
   },
   "Bosnia": {
     "lat": 43.8563,
     "lon": 18.4131,
     "capital": "Sarajevo",
-    "brightness": 0.43046721000000016,
+    "brightness": 0.38742048900000015,
     "lastSeenAt": 1791846219390
   },
   "Sri Lanka": {
     "lat": 6.9271,
     "lon": 79.8612,
     "capital": "Colombo",
-    "brightness": 0.7290000000000001,
+    "brightness": 0.6561000000000001,
     "lastSeenAt": 1791933103366
   },
   "Turkey": {
@@ -249,27 +249,27 @@
     "lon": 32.8597,
     "capital": "Ankara",
     "brightness": 1,
-    "lastSeenAt": 1791998405064
+    "lastSeenAt": 1792009376602
   },
   "Vietnam": {
     "lat": 21.0285,
     "lon": 105.8542,
     "capital": "Hanoi",
     "brightness": 1,
-    "lastSeenAt": 1791998405064
+    "lastSeenAt": 1792009376602
   },
   "Mexico": {
     "lat": 19.4326,
     "lon": -99.1332,
     "capital": "Mexico City",
-    "brightness": 0.43046721000000016,
+    "brightness": 0.38742048900000015,
     "lastSeenAt": 1791846219390
   },
   "Argentina": {
     "lat": -34.6037,
     "lon": -58.3816,
     "capital": "Buenos Aires",
-    "brightness": 0.43046721000000016,
+    "brightness": 0.38742048900000015,
     "lastSeenAt": 1791846219390
   },
   "Jamaica": {
@@ -277,13 +277,13 @@
     "lon": -76.7936,
     "capital": "Kingston",
     "brightness": 1,
-    "lastSeenAt": 1791998405064
+    "lastSeenAt": 1792009376602
   },
   "Syria": {
     "lat": 33.5138,
     "lon": 36.2765,
     "capital": "Damascus",
-    "brightness": 0.7290000000000001,
+    "brightness": 0.6561000000000001,
     "lastSeenAt": 1791933103366
   },
   "Lebanon": {
@@ -291,34 +291,34 @@
     "lon": 35.5018,
     "capital": "Beirut",
     "brightness": 1,
-    "lastSeenAt": 1791998405064
+    "lastSeenAt": 1792009376602
   },
   "Brazil": {
     "lat": -15.8267,
     "lon": -47.9218,
     "capital": "Brasilia",
-    "brightness": 0.43046721000000016,
+    "brightness": 0.38742048900000015,
     "lastSeenAt": 1791846219390
   },
   "Iraq": {
     "lat": 33.3152,
     "lon": 44.3661,
     "capital": "Baghdad",
-    "brightness": 0.9,
+    "brightness": 0.81,
     "lastSeenAt": 1791987555502
   },
   "Panama": {
     "lat": 8.9824,
     "lon": -79.5199,
     "capital": "Panama City",
-    "brightness": 0.43046721000000016,
+    "brightness": 0.38742048900000015,
     "lastSeenAt": 1791846219390
   },
   "Jordan": {
     "lat": 31.9454,
     "lon": 35.9284,
     "capital": "Amman",
-    "brightness": 0.43046721000000016,
+    "brightness": 0.38742048900000015,
     "lastSeenAt": 1791846219390
   },
   "Kosovo": {
@@ -326,13 +326,13 @@
     "lon": 21.1655,
     "capital": "Pristina",
     "brightness": 1,
-    "lastSeenAt": 1791998405064
+    "lastSeenAt": 1792009376602
   },
   "Somalia": {
     "lat": 2.0469,
     "lon": 45.3182,
     "capital": "Mogadishu",
-    "brightness": 0.7290000000000001,
+    "brightness": 0.6561000000000001,
     "lastSeenAt": 1791933103366
   },
   "Malawi": {
@@ -340,27 +340,27 @@
     "lon": 33.7741,
     "capital": "Lilongwe",
     "brightness": 1,
-    "lastSeenAt": 1791998405064
+    "lastSeenAt": 1792009376602
   },
   "New Zealand": {
     "lat": -41.2865,
     "lon": 174.7762,
     "capital": "Wellington",
-    "brightness": 0.81,
-    "lastSeenAt": 1791976603555
+    "brightness": 1,
+    "lastSeenAt": 1792009376602
   },
   "Azerbaijan": {
     "lat": 40.4093,
     "lon": 49.8671,
     "capital": "Baku",
-    "brightness": 0.47829690000000014,
-    "lastSeenAt": 1791889581373
+    "brightness": 1,
+    "lastSeenAt": 1792009376602
   },
   "Chad": {
     "lat": 12.1348,
     "lon": 15.0557,
     "capital": "N'Djamena",
-    "brightness": 0.7290000000000001,
+    "brightness": 0.6561000000000001,
     "lastSeenAt": 1791933103366
   },
   "Zimbabwe": {
@@ -368,41 +368,41 @@
     "lon": 31.0335,
     "capital": "Harare",
     "brightness": 1,
-    "lastSeenAt": 1791998405064
+    "lastSeenAt": 1792009376602
   },
   "Namibia": {
     "lat": -22.5594,
     "lon": 17.0832,
     "capital": "Windhoek",
-    "brightness": 0.7290000000000001,
+    "brightness": 0.6561000000000001,
     "lastSeenAt": 1791933103366
   },
   "Georgia": {
     "lat": 41.7151,
     "lon": 44.8271,
     "capital": "Tbilisi",
-    "brightness": 0.5314410000000002,
+    "brightness": 0.47829690000000014,
     "lastSeenAt": 1791900713614
   },
   "Nepal": {
     "lat": 27.7172,
     "lon": 85.324,
     "capital": "Kathmandu",
-    "brightness": 0.5314410000000002,
+    "brightness": 0.47829690000000014,
     "lastSeenAt": 1791900713614
   },
   "Haiti": {
     "lat": 18.5944,
     "lon": -72.3074,
     "capital": "Port-au-Prince",
-    "brightness": 0.81,
+    "brightness": 0.7290000000000001,
     "lastSeenAt": 1791976603555
   },
   "Ecuador": {
     "lat": -0.1807,
     "lon": -78.4678,
     "capital": "Quito",
-    "brightness": 0.47829690000000014,
+    "brightness": 0.43046721000000016,
     "lastSeenAt": 1791889581373
   },
   "Democratic Republic of the Congo": {
@@ -410,34 +410,34 @@
     "lon": 15.2663,
     "capital": "Kinshasa",
     "brightness": 1,
-    "lastSeenAt": 1791998405064
+    "lastSeenAt": 1792009376602
   },
   "Philippines": {
     "lat": 14.5995,
     "lon": 120.9842,
     "capital": "Manila",
     "brightness": 1,
-    "lastSeenAt": 1791998405064
+    "lastSeenAt": 1792009376602
   },
   "Botswana": {
     "lat": -24.6282,
     "lon": 25.9231,
     "capital": "Gaborone",
     "brightness": 1,
-    "lastSeenAt": 1791998405064
+    "lastSeenAt": 1792009376602
   },
   "South Sudan": {
     "lat": 4.8594,
     "lon": 31.5713,
     "capital": "Juba",
     "brightness": 1,
-    "lastSeenAt": 1791998405064
+    "lastSeenAt": 1792009376602
   },
   "Venezuela": {
     "lat": 10.4806,
     "lon": -66.9036,
     "capital": "Caracas",
     "brightness": 1,
-    "lastSeenAt": 1791998405064
+    "lastSeenAt": 1792009376602
   }
 }
